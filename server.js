@@ -16,4 +16,10 @@ io.sockets.on("connection", newConnection);
 
 function newConnection(socket) {
   console.log(`newConnection: ${socket.id}`);
+
+  socket.on("mouse", mouseMsg);
+}
+
+function mouseMsg(mousePosition) {
+  console.log(mousePosition);
 }

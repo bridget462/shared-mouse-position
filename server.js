@@ -18,8 +18,11 @@ function newConnection(socket) {
   console.log(`newConnection: ${socket.id}`);
 
   socket.on("mouse", mouseMsg);
-}
 
-function mouseMsg(mousePosition) {
-  console.log(mousePosition);
+  function mouseMsg(mousePosition) {
+    // sending data except ourself
+    socket.broadcast.emit("mouse", mousePosition);
+    // sending data including ourself
+    // io.sockets.emit("mouse", mousePosition);
+  }
 }

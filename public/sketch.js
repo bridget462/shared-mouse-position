@@ -27,3 +27,17 @@ function mouseDragged() {
   fill(255);
   ellipse(mouseX, mouseY, 30, 30);
 }
+
+function draw() {
+  line(width / 2, 0, width / 2, height);
+  line(0, height / 2, width, height / 2);
+  if (mouseX < 50 && mouseY < 50) {
+    cursor(CROSS);
+  } else if (mouseX > 50 && mouseY < 50) {
+    cursor("progress");
+  } else if (mouseX > 50 && mouseY > 50) {
+    cursor("https://avatars0.githubusercontent.com/u/1617169?s=16");
+  } else {
+    cursor("grab");
+  }
+}

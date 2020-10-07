@@ -1,6 +1,7 @@
 let socket;
 
 function setup() {
+  frameRate(12);
   createCanvas(1280, 720);
   background(220);
 
@@ -11,24 +12,34 @@ function setup() {
 }
 
 function otherUserDrawing(mousePosition) {
-  noStroke();
-  fill(255, 0, 100);
+  // noStroke();
+  // fill(255, 0, 100);
   ellipse(mousePosition.x, mousePosition.y, 30, 30);
 }
 
-function mouseDragged() {
-  let mousePosition = {
-    x: mouseX,
-    y: mouseY,
-  };
-  socket.emit("mouse", mousePosition);
+function draw() {
+  clear();
 
-  noStroke();
-  fill(255);
-  ellipse(mouseX, mouseY, 30, 30);
+  // draw canvas border
+  stroke("rgba(0,255,0,0.25)");
+  strokeWeight(4);
+  rect(0, 0, width, height);
+
+  drawLineFromPreviousPosition();
+
+  // console.log(`current mouse position: ${mouseX}`);
+  if (0 <= mouseX && mouseX <= width && 0 <= mouseY && mouseY <= height) {
+    console.log("mouse within canvas");
+    let mousePosition = {
+      x: mouseX,
+      y: mouseY,
+    };
+    socket.emit("mouse", mousePosition);
+  }
 }
 
-function draw() {
-  // change cursor only on the canvas
-  cursor("grab");
+function drawLineFromPreviousPosition() {
+  stroke(4, 220, 212);
+  strokeWeight(4);
+  line(mouseX, mouseY, pmouseX, pmouseY);
 }

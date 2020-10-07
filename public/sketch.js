@@ -2,12 +2,13 @@ let socket;
 
 function setup() {
   createCanvas(800, 500);
-  print("setup");
+  background(220);
 
   socket = io.connect("http://localhost:3000");
 }
 
 function draw() {
-  background(220);
+  noStroke();
+  fill(255);
   ellipse(mouseX, mouseY, 30, 30);
 }
